@@ -45,3 +45,17 @@ nosetests.xml
 
 #.phar archives
 *.phar
+
+/wisdom/notejam/.idea/
+
+/wisdom/notejam/notejam.iml
+
+/wisdom/notejam/target/
+
+/wisdom/notejam/src/main/resources/templates/screenshots/
+
+/wisdom/notejam/src/main/resources/templates/user/welcome.thl.html
+
+/wisdom/notejam/src/main/resources/templates/user/alerts-and-errors.thl.html
+
+/wisdom/notejam/src/main/resources/assets/html/
