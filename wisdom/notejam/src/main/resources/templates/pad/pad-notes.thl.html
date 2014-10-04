@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+
+<head th:replace="base :: head" lang="en">
+</head>
+<body>
+<div class="container">
+
+    <div th:replace="base :: inout"></div>
+    <div th:replace="base :: header"></div>
+    <div th:replace="base :: myPads"></div>
+
+    <div class="thirteen columns content-area">
+        <!--<div class="alert-area">-->
+        <!--<div class="alert alert-success">Note is sucessfully saved</div>-->
+        <!--</div>-->
+        <table class="notes">
+            <tr>
+                <th class="note">Note <a href="#" class="sort_arrow" >&uarr;</a><a href="#" class="sort_arrow" >&darr;</a></th>
+                <th>Pad</th>
+                <th class="date">Last modified <a href="#" class="sort_arrow" >&uarr;</a><a href="#" class="sort_arrow" >&darr;</a></th>
+            </tr>
+            <tr th:each="note : ${noteList} ">
+                <td><a href="#"
+                       th:href="${'/notes/view/'+@java.net.URLEncoder@encode(note.id)}"
+                       th:text="${note.name}">My sport activites</a></td>
+                <td class="pad"><a href="#" th:text="${note.getPad().getName()}"
+                                  th:href="${'/pad/'+@java.net.URLEncoder@encode(note.getPad().getId())}">Pad</a></td>
+                <td class="hidden-text date" th:text="${note.updated_at}">Today at 10:51</td>
+            </tr>
+
+        </table>
+        <a href="/notes/create" class="button">New note</a>
+        <a href="/pad/view/{pad.id}"
+           th:href="${'/pad/'+@java.net.URLEncoder@encode(padid)+'/edit'}"
+           class="button">Edit pad</a>
+        <a href="#"
+           th:href="${'/pad/'+@java.net.URLEncoder@encode(padid)+'/delete'}" class="button">Delete
+            Pad</a>
+    </div>
+    <hr class="footer" />
+
+    <div th:replace="base ::footer">
+    </div>
+</div><!-- container -->
+<a th:replace="base :: ribbon"></a>
+</body>
+</html>
+
+
+
+

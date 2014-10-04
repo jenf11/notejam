@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+
+<head th:replace="base :: head" lang="en">
+
+
+
+</head>
+<body>
+<div class="container">
+
+    <div th:replace="base :: inout"></div>
+    <div th:replace="base :: header"></div>
+
+    <div class="thirteen columns content-area">
+        <form class="offset-by-six sign-in" action="/signin" method="post">
+            <label for="email">Email</label>
+            <input type="text" name="email" id="email"/>
+            <ul class="errorlist">
+                <li></li>
+            </ul>
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password"/>
+            <ul class="errorlist">
+                <li th:text="${#flash.get('message')}"></li>
+            </ul>
+            <input type="submit" value="Sign In"/> or <a href="/signup">Sign up</a>
+            <hr />
+            <p><a href="#forgot-password" class="small-red">Forgot password?</a></p>
+        </form>
+    </div>
+    <hr class="footer" />
+    <div th:replace="base ::footer">
+    </div>
+</div><!-- container -->
+<a th:replace="base :: ribbon"></a>
+</body>
+</html>
+
+
+
+

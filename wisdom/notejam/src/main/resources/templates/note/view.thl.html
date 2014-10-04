@@ -1,0 +1,41 @@
+
+    <!DOCTYPE html>
+    <!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+    <!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+    <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+    <!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+
+    <head th:replace="base :: head" lang="en">
+    </head>
+    <body>
+    <div class="container">
+
+        <div th:replace="base :: inout"></div>
+        <div th:replace="base :: header"></div>
+        <div th:replace="base :: myPads"></div>
+        <div class="thirteen columns content-area">
+            <p th:text="${note.updated_at}" class="hidden-text">Last edited at 10:32</p>
+            <div class="note" th:text="${note.text}">
+                <p>
+                    The typography of Skeleton is designed to create a strong hierarchy with basic styles. The primary font is the classic Helvetica Neue, but the font stack can be easily changed with just a couple adjustments. Regular paragraphs are set at a 14px base with 21px line height.
+                </p>
+                <p>
+                    The typography of Skeleton is designed to create a strong hierarchy with basic styles. The primary font is the classic Helvetica Neue, but the font stack can be easily changed with just a couple adjustments. Regular paragraphs are set at a 14px base with 21px line height.
+                </p>
+            </div>
+            <a th:href="${'/notes/'+@java.net.URLEncoder@encode(note.id)+'/edit'}" class="button">
+                Edit</a>
+            <a th:href="${'/notes/'+@java.net.URLEncoder@encode(note.id)+'/delete'}" href="#"
+               class="delete-note">Delete it</a>
+        </div>
+        <hr class="footer" />
+        <div th:replace="base ::footer">
+        </div>
+    </div><!-- container -->
+    <a th:replace="base :: ribbon"></a>
+    </body>
+    </html>
+
+
+
+

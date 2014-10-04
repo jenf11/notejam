@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+
+<head th:replace="base :: head" lang="en">
+</head>
+<body>
+<div class="container">
+
+    <div th:replace="base :: inout"></div>
+    <div th:replace="base :: header"></div>
+    <div th:replace="base :: myPads"></div>
+
+    <div class="thirteen columns content-area">
+        <form action="/notes/create" method="post" class="note">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name"/>
+            <label for="text">Note</label>
+            <textarea name="content" id="text"></textarea>
+            <label for="list">Select Pad</label>
+            <select id="list" name="pad_id">
+                <option name="pad_id" th:each="pad : ${padList} "
+                        th:text= "${pad.name}"
+                        th:name="${pad.id}"
+                        th:value="${pad.id}">--------</option>
+                </select>
+            <input type="submit" value="Save"/>
+        </form>
+    </div>
+    <hr class="footer" /><div th:replace="base ::footer">
+    </div>
+</div><!-- container -->
+<a th:replace="base :: ribbon"></a>
+</body>
+</html>
+
+
+
+

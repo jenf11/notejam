@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+
+<head th:replace="base :: head" lang="en">
+
+
+
+</head>
+<body>
+<div class="container">
+
+    <div th:replace="base :: inout"></div>
+    <div th:replace="base :: header"></div>
+    <div class="thirteen columns content-area">
+        <form action="/settings" method= "post" class="offset-by-six sign-in">
+            <label for="email">Current Password</label>
+            <input type="password" name="pwd" id="email"/>
+            <ul class="errorlist">
+                <li></li>
+            </ul>
+            <label for="password"> New Password</label>
+            <input type="password" name="newpwd" id="password"/>
+            <ul class="errorlist">
+                <li></li>
+            </ul>
+            <label for="confirm-password">Confirm password</label>
+            <input type="password" name="confirmpwd" id="confirm-password"/>
+            <ul class="errorlist">
+                <li th:text="${#flash.get('message')}"></li>
+            </ul>
+            <input type="submit" value="Change Password"/> or <a href='/'>Cancel</a>
+        </form>
+
+    </div>
+    <hr class="footer" />
+
+
+    <hr class="footer" />
+    <div th:replace="base ::footer">
+    </div>
+</div><!-- container -->
+<a th:replace="base :: ribbon"></a>
+</body>
+</html>
