@@ -2,9 +2,7 @@ package org.wisdom.notejam.controller.user;
 
 import com.orientechnologies.orient.core.sql.query.OSQLSynchQuery;
 import javassist.util.proxy.Proxy;
-import org.apache.felix.ipojo.annotations.Component;
-import org.apache.felix.ipojo.annotations.Instantiate;
-import org.apache.felix.ipojo.annotations.Provides;
+
 import org.apache.felix.ipojo.annotations.Requires;
 import org.wisdom.api.annotations.Model;
 import org.wisdom.api.annotations.Service;
@@ -25,29 +23,26 @@ import java.util.Set;
  * Date: 04/09/14
  * Time: 10:02
  */
-@Component
-@Provides
-@Instantiate
-
+@Service
 public class UserManager implements UserService {
-
+    static {Class workaround = Proxy.class;}
     @Model(value = User.class)
     private OrientDbCrud<User, String> userCrud;
 
-    Class klass = Proxy.class;
+
 
     public UserManager(){
         //constructor
     }
 
-    @Override
+
     public void changePassword(User user, String pwd){
 
         user.setPassword(pwd);
        user= userCrud.save(user);
 
     }
-    @Override
+
     public User findUserByEmail(String email){
 
         List<User> list = new LinkedList<User>();
@@ -69,12 +64,12 @@ public class UserManager implements UserService {
 
     }
 
-    @Override
+
     public boolean checkUserName(String name){
         return true;
 
     }
-    @Override
+
     public boolean checkPassword(User user, String password){
         if(user !=null && !password.isEmpty()) {
             System.out.println(crypto.encryptAES(password));
@@ -92,7 +87,7 @@ public class UserManager implements UserService {
     @Requires
     Crypto crypto;
 
-    @Override
+
     public User createUser(String email, String password) {
 
         User u = new User();
@@ -103,14 +98,14 @@ public class UserManager implements UserService {
         Set<ConstraintViolation<User>> list = validator.validate(u);
         if (list.isEmpty()) {
             u = userCrud.save(u);
-
+            System.out.println("user created "+u.getId());
             return u;
         } else {
             return null;
         }
     }
 
-    @Override
+
     public List<User> listAllUsers() {
 
         List<User> list = new LinkedList<User>();
@@ -120,7 +115,7 @@ public class UserManager implements UserService {
         return list;
     }
 
-   @Override
+
    public void deleteAll(){
        List<User> list = listAllUsers();
        for(int i =0;i<list.size();i++) {

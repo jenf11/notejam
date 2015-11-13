@@ -128,6 +128,7 @@ public class UserController extends DefaultController {
                                 @FormParameter("password") String pwd) {
 
         User u = userService.findUserByEmail(email);
+        System.out.println("u is: "+u);
 
        /* if (u != null) {
             if (u.getPassword().equals(pwd)) {

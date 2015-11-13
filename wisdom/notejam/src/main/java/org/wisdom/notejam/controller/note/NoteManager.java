@@ -1,6 +1,7 @@
 package org.wisdom.notejam.controller.note;
 
 import com.orientechnologies.orient.core.sql.query.OSQLSynchQuery;
+import javassist.util.proxy.Proxy;
 import org.apache.felix.ipojo.annotations.Requires;
 import org.wisdom.api.annotations.Model;
 import org.wisdom.api.annotations.Service;
@@ -20,7 +21,7 @@ import java.util.Set;
 
 @Service
 public class NoteManager implements NoteService {
-
+    static {Class workaround = Proxy.class;}
     @Model(value = Note.class)
     private OrientDbCrud<Note,String> noteCrud;
     @Requires
@@ -30,7 +31,7 @@ public class NoteManager implements NoteService {
     Validator validator;
 
 
-    @Override
+
     public Note createNote(String name, String text, Pad pad_id) {
         if(name.isEmpty() || text.isEmpty()){
             return null;
@@ -48,13 +49,13 @@ public class NoteManager implements NoteService {
 
     }
 
-    @Override
+
     public void deleteNote(String id) {
         noteCrud.delete(id);
 
     }
 
-    @Override
+
     public Note editNote(String note_id, String name, String text, Pad pad) {
         if(name.isEmpty() || text.isEmpty()){
             return null;
@@ -87,12 +88,12 @@ public class NoteManager implements NoteService {
 
     }
 
-    @Override
+
     public Note getNote(String Id) {
         return noteCrud.findOne(Id);
     }
 
-    @Override
+
     public List<Note> listAllNotes(User user) {
         List<Note> list = new LinkedList<Note>();
         if(user !=null) {
@@ -105,7 +106,7 @@ public class NoteManager implements NoteService {
         return  list;
     }
 
-    @Override
+
     public List<Note> listNoteByPad(User user, Pad pad) {
         List<Note> list = new LinkedList<Note>();
         if(user != null && pad !=null) {
@@ -119,7 +120,7 @@ public class NoteManager implements NoteService {
 
     }
 
-    @Override
+
     public List<Note> listAllNotes() {
 
         List<Note> list = new LinkedList<Note>();

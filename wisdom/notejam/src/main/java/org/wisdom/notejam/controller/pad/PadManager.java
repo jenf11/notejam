@@ -1,6 +1,7 @@
 package org.wisdom.notejam.controller.pad;
 
 import com.orientechnologies.orient.core.sql.query.OSQLSynchQuery;
+import javassist.util.proxy.Proxy;
 import org.apache.felix.ipojo.annotations.Requires;
 import org.wisdom.api.annotations.Model;
 import org.wisdom.api.annotations.Service;
@@ -21,13 +22,13 @@ import java.util.List;
  */
 @Service
 public class PadManager implements PadService {
-
+    static {Class workaround = Proxy.class;}
     @Model(value = Pad.class)
     private OrientDbCrud<Pad,String> padCrud;
     @Requires
     UserService users;
 
-    @Override
+
     public List<Pad> listAllPads() {
         List<Pad> list = new LinkedList<Pad>();
         List<Pad> query = padCrud.query(new OSQLSynchQuery<Pad>("select * " + "from Pad "));
@@ -37,7 +38,7 @@ public class PadManager implements PadService {
     }
 
 
-    @Override
+
     public Pad createPad(String name, String email) {
        // System.out.println("inside create pad name : "+name + " -email : "+email);
         User user = users.findUserByEmail(email);
@@ -48,7 +49,7 @@ public class PadManager implements PadService {
         }
     }
 
-    @Override
+
     public Pad createPad(String name, User user) {
         if(name.isEmpty() || user == null){
             return null;
@@ -61,13 +62,13 @@ public class PadManager implements PadService {
         return newPad;
     }
 
-    @Override
+
     public void deletePad(String id) {
         padCrud.delete(id);
 
     }
 
-    @Override
+
     public Pad editPad(String name, String id) {
         Pad p = padCrud.findOne(id);
         p.setName(name);
@@ -75,12 +76,12 @@ public class PadManager implements PadService {
         return p;
     }
 
-    @Override
+
     public Pad getPad(String id) {
         return padCrud.findOne(id);
     }
 
-    @Override
+
     public List<Pad> listAllPads(User user) {
         List<Pad> list = new LinkedList<Pad>();
         List<Pad> query = padCrud.query(new OSQLSynchQuery<Pad>("select * " + "from Pad where " +

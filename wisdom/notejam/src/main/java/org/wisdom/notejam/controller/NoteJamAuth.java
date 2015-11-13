@@ -14,12 +14,12 @@ import org.wisdom.api.security.Authenticator;
  */
 @Service
 public class NoteJamAuth implements Authenticator {
-    @Override
+
     public String getName() {
         return "myAuth";
     }
 
-    @Override
+
     public String getUserName(Context context) {
 
         if(context.session().get("email") != null){
@@ -28,7 +28,7 @@ public class NoteJamAuth implements Authenticator {
         return null;
     }
 
-    @Override
+
     public Result onUnauthorized(Context context) {
         System.out.println("Redirecting...");
         return Results.redirect("/signin");
